@@ -1,0 +1,119 @@
+Ordered Clustering-Based Semantic Music Recommender System Using Deep Learning Selection
+Description
+This repository contains the implementation of an ordered clustering-based semantic music recommender system that integrates semantic analysis of user-generated textual comments with supervised learning models. The proposed framework is designed to address core challenges in music recommendation, including user preference modeling, similarity estimation, rating prediction, and the cold-start problem.
+The published study presents a novel music recommendation system designed to improve personalization on streaming platforms, particularly addressing the challenges of the cold start problem. The proposed approach combines order-based clustering with convolutional neural networks (CNNs) to leverage both semantic and behavioral information from users. Initially, the system calculates semantic similarity between users by analyzing their textual comments and sequentially clusters them into groups of decreasing similarity. Within each cluster, users’ favorite music and ratings are examined to identify shared preferences, which are then used as training input for a CNN to predict ratings for unreviewed music. Additionally, the method incorporates users’ listening behavior and music popularity to enhance recommendations, particularly for new users. By integrating semantic similarity, rating patterns, and music popularity, the system effectively predicts user preferences and generates highly accurate recommendations. Experimental results demonstrate superior performance compared to traditional classifiers, achieving low mean absolute error (MAE ≈ 0.0017), low root mean square error (RMSE ≈ 0.0017), a hit rate of 82.45%, average nDCG of 82.3%, and new rating prediction accuracy of 99.388%, confirming the effectiveness of combining semantic analysis and deep learning in music recommendation.
+DOI: 10.32604/cmc.2025.061343
+Authors
+Code Authors
+Yahya Dorostkar Navaei
+Yaser Ahangari Nanehkaran
+
+
+Related Publication
+Ha, W., et al. Ordered Clustering-Based Semantic Music Recommender System Using Deep Learning Selection.Computers, Materials & Continua, 2025, 83(2).
+DOI: 10.32604/cmc.2025.061343
+
+Associated Publication Authors
+Weitao Ha, Sheng Gang, Yahya D. Navaei, Abubakar S. Gezawa, and Yaser A. Nanehkaran
+
+Computing Infrastructure
+Experiments and simulations were conducted under the following environment:
+•	Hardware: Laptop ASUS N56J – Intel Core i7, 8 GB RAM
+•	Operating System: Windows 10 (64-bit)
+•	Software Environment: MATLAB R2021b
+
+Dataset Information
+The system operates on the dataset stored in:
+music_album_reviews.csv
+The dataset includes:
+•	reviewerID – Unique user identifiers
+•	asin1 – Music (item) identifiers
+•	reviewText – User textual comments/reviews
+•	overall – Numerical ratings assigned by users
+The data represent user interactions with music items, combining both explicit feedback (ratings) and implicit semantic information (textual comments).
+
+Code Overview
+The implementation performs the following major operations:
+1.	Data Preprocessing
+o	Random sampling and permutation of observations
+o	Missing value handling via constant imputation
+o	Extraction of unique users and items
+2.	Semantic Representation
+o	Tokenization of textual comments
+o	Stop-word removal
+o	Bag-of-words construction
+o	Vocabulary-based document representation
+3.	Similarity Computation
+o	Cosine similarity between semantic vectors
+o	Construction of a semantic similarity matrix
+4.	Sequential (Ordered) Clustering
+o	Users grouped based on similarity intensity
+o	Clusters arranged from highest to lowest semantic proximity
+5.	Ranking-Based Similarity
+o	Identification of common preferred music
+o	Similarity estimation using shared rankings
+6.	Rating Estimation
+o	CNN-based prediction of music ratings
+o	Comparative evaluation using KNN, Decision Tree, Naïve Bayes, and SVM
+7.	Cold-Start Strategy
+o	Recommendation based on music popularity scores
+8.	Evaluation and Visualization
+o	Accuracy, Recall, Precision, F-measure
+o	MAE and RMSE analysis
+o	Confusion matrices and performance plots
+
+Methodology
+The recommender system follows a multi-stage modeling strategy:
+1. Semantic Similarity Modeling
+User profiles are represented through semantic features extracted from textual comments. Cosine similarity is used to quantify semantic proximity between users.
+2. Ordered Clustering
+Sequential clustering organizes users into ordered clusters reflecting decreasing similarity levels. The first cluster contains users with the strongest semantic alignment.
+3. Ranking Similarity Analysis
+Within clusters, user preferences are compared based on shared favorite music. Ranking similarity captures agreement in rating behavior.
+4. Deep Learning-Based Rating Prediction
+Semantic features and rating information serve as training inputs to convolutional neural networks, enabling prediction of ratings for unseen items.
+5. Popularity-Aware Recommendation
+Music popularity is derived from aggregate rating statistics and incorporated to mitigate cold-start limitations.
+
+Assessment Metrics
+Performance evaluation relies on standard classification and prediction metrics:
+•	Accuracy – Measures overall correctness of predictions
+•	Recall – Evaluates the ability to identify relevant items
+•	Precision – Assesses correctness of positive predictions
+•	F-measure – Harmonic mean of Precision and Recall
+Error-based metrics:
+•	MAE (Mean Absolute Error) – Quantifies average prediction deviation
+•	RMSE (Root Mean Square Error) – Emphasizes larger prediction errors
+These metrics provide complementary perspectives on predictive reliability and recommendation quality.
+
+Requirements
+The following MATLAB libraries are typically required to reproduce the workflow:
+•	Text Analytics Toolbox – for text preprocessing, tokenization, bag-of-words modeling, and cosine similarity computation.
+•	Statistics and Machine Learning Toolbox – for KNN, Decision Tree, SVM, Naive Bayes classifiers, and sampling utilities.
+•	Deep Learning Toolbox – for constructing and training the convolutional neural network (CNN) used for rating prediction.
+•	MATLAB Base Functions – for data handling, plotting, and matrix operations.
+These toolboxes ensure full execution of preprocessing, clustering, similarity computation, classification, deep learning, and visualization steps in the provided scripts.
+Usage Instructions
+1.	Place the dataset file “music_album_reviews.mat” in the working directory.
+2.	Ensure all required Python libraries are installed.
+3.	Execute the main script after adapting MATLAB-specific logic (if converting) or run within a compatible environment.
+4.	Review generated plots and metrics for performance interpretation.
+
+Conclusions
+The proposed framework demonstrates that integrating semantic analysis with ordered clustering and deep learning can effectively model user preferences and predict music ratings. Semantic similarity derived from textual comments provides valuable information beyond numerical ratings alone.
+The hybrid strategy improves recommendation robustness while offering a practical solution to cold-start scenarios via popularity-aware mechanisms.
+
+Limitations
+Several limitations should be acknowledged:
+•	Dependence on the quality and representativeness of textual comments
+•	Sensitivity of cosine similarity to vocabulary construction
+•	Potential bias introduced by missing value imputation
+•	Model performance variability across datasets
+•	Popularity-based cold-start mitigation may reduce personalization
+Future research may explore advanced embeddings, contextual models, and dynamic preference learning.
+
+License
+This project is provided for academic and research purposes. Licensing terms should be specified by the authors prior to redistribution or commercial use.
+Contributions
+Contributions, corrections, and extensions are welcome subject to author approval.
+
